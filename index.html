@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Code snippets for common web components">
+  <title>Gbut</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+
+  <div id="loading-spinner" class="loading-overlay">
+    <div class="spinner-container">
+      <div class="spinner-outer"></div>
+      <div class="spinner-inner"></div>
+    </div>
+  </div>
+
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <i data-lucide="code-2" class="brand-icon"></i>
+          <span class="brand-text">MFA</span>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+          <i data-lucide="moon" class="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="container">
+    <div class="header">
+      <h1>Codex</h1>
+      <p>Copas code</p>
+    </div>
+
+    <div class="code-blocks">
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-info">
+            <span>Js</span>
+            <span>•</span>
+            <span>plugin kick</span>
+          </div>
+          <button class="copy-button" aria-label="Copy HTML code">
+            <i data-lucide="copy" class="copy-icon"></i>
+          </button>
+        </div>
+        <pre><code class="language-html">let handler = async (m, { Thezy, args, reply }) => {
+  let users = m.mentionedJid?.[0] 
+    || (m.quoted ? m.quoted.sender : (args[0] ? args[0].replace(/[^0-9]/g, '') + "@s.whatsapp.net" : null));
+
+  if (!users) return m.reply("❌ Harap tag atau reply pengguna yang ingin dikeluarkan!");
+
+  try {
+    await Thezy.groupParticipantsUpdate(m.chat, [users], "remove");
+    m.reply(`✅ @${users.split("@")[0]} telah dikeluarkan dari grup!`);
+  } catch (error) {
+    m.reply("⚠️ Gagal mengeluarkan pengguna. Pastikan bot memiliki izin admin!");
+  }
+};
+
+handler.tags = ["groupmenu"];
+handler.command = ["kick"];
+handler.description = ["Mengeluarkan anggota dari grup"];
+handler.group = true;
+handler.admin = true;
+handler.botAdmin = true;
+
+module.exports = handler;
+</code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-info">
+            <span>JS</span>
+            <span>•</span>
+            <span>Plugin hidetag</span>
+          </div>
+          <button class="copy-button" aria-label="Copy CSS code">
+            <i data-lucide="copy" class="copy-icon"></i>
+          </button>
+        </div>
+        <pre><code class="language-css">const handler = async (m, { Thezy, text }) => {
+    if (!text) return m.reply("Teks tidak boleh kosong.");
+
+    let groupMetadata = await Thezy.groupMetadata(m.chat);
+    let tagJid = groupMetadata.participants.map(p => p.id);
+
+    await Thezy.sendMessage(m.chat, {
+        text,
+        mentions: tagJid
+    }, { quoted: m });
+};
+
+handler.command = ["hidetag"];
+handler.tags = ["groupmenu"];
+handler.description = ["Tag semua member"];
+handler.group = true;
+handler.admin = true;
+handler.botAdmin = true;
+
+module.exports = handler;
+
+</code></pre>
+      </div>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-info">
+            <span>JavaScript</span>
+            <span>•</span>
+            <span>JavaScript Logic</span>
+          </div>
+          <button class="copy-button" aria-label="Copy JavaScript code">
+            <i data-lucide="copy" class="copy-icon"></i>
+          </button>
+        </div>
+        <pre><code class="language-javascript">// Accordion Menu JavaScript
+document.querySelectorAll('.accordion-button').forEach(button => {
+  button.addEventListener('click', () => {
+    const content = button.nextElementSibling;
+    
+    // Close all other accordion items
+    document.querySelectorAll('.accordion-content').forEach(item => {
+      if (item !== content) {
+        item.classList.remove('active');
+      }
+    });
+    
+    // Toggle current item
+    content.classList.toggle('active');
+  });
+});</code></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Built with HTML, CSS, and JavaScript</p>
+    </div>
+  </footer>
+</body>
+</html>
